@@ -1,0 +1,68 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block menu %}
+	<div class="hero-white">
+		<div class="header clearfix">
+			{% include 'mainapp/include/inc_logo_menu.html' %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="details">
+		<div class="links clearfix">
+			{% include 'mainapp/include/inc_submenu.html' %}
+		</div>
+
+		<div class="details-products">
+			<div class="details-slider">
+				<div class="slider-product">
+					<img src="{% static '/img/slider1.jpg' %}">
+				</div>
+				<div class="slider-control">
+					{% for img in product_info.images %}
+						<div class="block">
+							<a href="#"><img src="{% static img %}" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="description">
+				<h3 class="big-bold">{{product_info.h3}}</h3>
+				<h3 class="red">{{product_info.hot_deal}}</h3>
+				<p class="price">{{product_info.price}}<span>{{product_info.currency}}</span></p>
+				<a href="#" class="red-button">
+					заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
+				</a>
+				<div class="description-text">
+					{% for text in product_info.description %}
+						<p>{{text|capfirst}}</p>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+		<div class="related">
+			<div class="title clearfix">
+				<h2>Похожие продукты</h2>
+				<a class="explore" href="#">показать все <img src="{% static 'img/arrow.png' %}" alt=""></a>
+			</div>
+			<div class="related-products clearfix">
+				{% for product in similar_products %}
+					<div class="block">
+						<a href="{% url product.href %}"><img src="{% static product.img %}" alt="">
+							<div class="text">
+								<img src="{% static 'img/icon-hover.png' %}" alt="img">
+								<h4>{{product.short_desc|capfirst}}</h4>
+								<p>Не оторваться.</p>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
