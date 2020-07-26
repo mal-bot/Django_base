@@ -1,0 +1,8 @@
+<a href="{% url 'main' %}" class="logo"></a>
+<ul class="menu">
+    {% for item in main_menu %}
+        <li><a href="{% url item.href %}" {% if request.resolver_match.url_name == item.href %}class="active"{% endif %}>{{item.name}}</a></li>
+    {% endfor %}
+</ul>
+<a href="#" class="search"></a>
+<a href="#" class="basket"><span class="fa fa-shopping-basket"></span></a>
